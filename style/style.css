@@ -15,6 +15,24 @@
 i {
   color: inherit;
 }
+
+a {
+  color: inherit;
+  font-weight: bold;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: 1px solid;
+  background-color: transparent;
+}
+
 body {
   background-color: #f0e9d2;
 }
@@ -351,23 +369,6 @@ body {
 img {
   max-width: 100%;
   display: block;
-}
-
-a {
-  color: inherit;
-  font-weight: bold;
-}
-
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
-button {
-  border: 1px solid;
-  background-color: transparent;
 }
 
 .responsive-container {
