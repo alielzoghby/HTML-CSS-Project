@@ -133,7 +133,13 @@ body {
     align-items: center;
     text-align: center;
   }
+  li:has(> .active) {
+    border-bottom: 2px solid black;
+  }
 
+  .active {
+    border: none;
+  }
   .menu > .nav > ul > li:hover,
   .menu > .nav > ul > li:hover i,
   .menu > .nav > ul > li:hover a {
@@ -209,18 +215,8 @@ button {
   outline: none;
   border: 2px solid rgba(0, 0, 0, 0.658);
 }
-textarea {
-  width: 600px;
-  resize: none;
-  background-color: #f0e9d2;
-  margin-top: 5px;
-  padding: 10px;
-  outline: none;
-  border: 2px solid rgba(0, 0, 0, 0.658);
-  height: 200px;
-}
-input:focus,
-textarea:focus {
+
+input:focus {
   border: 2px solid black;
   box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
 }

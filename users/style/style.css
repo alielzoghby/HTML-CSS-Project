@@ -133,7 +133,13 @@ body {
     align-items: center;
     text-align: center;
   }
+  li:has(> .active) {
+    border-bottom: 2px solid black;
+  }
 
+  .active {
+    border: none;
+  }
   .menu > .nav > ul > li:hover,
   .menu > .nav > ul > li:hover i,
   .menu > .nav > ul > li:hover a {
@@ -200,7 +206,7 @@ body {
   font-weight: 700;
 }
 table {
-  width: 900px;
+  width: 80%;
 }
 table,
 table tr td,

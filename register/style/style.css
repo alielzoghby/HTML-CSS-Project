@@ -142,7 +142,13 @@ body {
     animation: anime 0.5s ease-in-out;
     border-radius: 6px;
   }
+  li:has(> .active) {
+    border-bottom: 2px solid black;
+  }
 
+  .active {
+    border: none;
+  }
   .menu > .nav {
     display: none;
   }
@@ -172,11 +178,105 @@ body {
 
 /* /////////////////////////////////////////////////////////////////////// */
 .foo {
-  padding: 100px 20px;
+  padding: 50px 20px;
   width: 90%;
   display: flex;
   justify-content: center;
   background-color: black;
   color: #f0e9d2;
   margin: auto;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////// */
+.content {
+  width: 90%;
+  margin: 30px auto;
+  padding: 15px 60px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #e6ddc4;
+}
+.content > h1 {
+  text-align: center;
+  margin: 30px;
+  font-size: 25px;
+  font-weight: 700;
+}
+.content form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  align-content: space-between;
+  border: 1px solid rgba(0, 0, 0, 0.664);
+  padding: 30px;
+}
+.content form .feild {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+.content form .feild .res {
+  width: 68%;
+  display: flex;
+  justify-content: space-around;
+}
+input:not(input[type="radio"]),
+button {
+  width: 70%;
+  margin-top: 5px;
+  padding: 2px;
+  background-color: #f0e9d2;
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0.658);
+}
+
+input:not(input[type="radio"]):focus {
+  border: 2px solid black;
+  box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+button {
+  width: 200px;
+  margin: 20px auto;
+  border-radius: 50px;
+  background-color: #678983;
+  color: #181d31;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 10px;
+}
+
+button:hover {
+  background-color: #181d31;
+  color: #678983;
+  transform: scale(1.05);
+  transition: 0.25s all ease-in-out;
+}
+
+@media screen and (min-width: 781px) {
+  .content form {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 780px) {
+  .content form {
+    width: 100%;
+  }
+  .content form .feild {
+    flex-direction: column;
+    margin: 10px;
+  }
+
+  .content form .feild:nth-child(3) {
+    flex-direction: row;
+    height: 40px;
+  }
+  .la {
+    align-self: flex-start;
+  }
+
+  input:not(input[type="radio"]) {
+    width: 100%;
+  }
 }

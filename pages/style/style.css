@@ -125,6 +125,7 @@ body {
     flex-direction: column;
     align-items: stretch;
   }
+
   .menu > .nav > ul > li {
     padding: 18px auto;
     border-top: 1px solid black;
@@ -178,8 +179,7 @@ body {
   background-color: #e6ddc4;
 }
 .prod .img {
-  margin: 5;
-  width: 500px;
+  width: 45%;
   height: 350px;
 }
 .prod .img img {
@@ -187,9 +187,23 @@ body {
   height: 100%;
 }
 .prod .detil {
-  width: 500px;
+  width: 50%;
   display: flex;
   align-items: center;
+}
+
+@media screen and (max-width: 700px) {
+  .prod {
+    flex-direction: column;
+    padding: 30px 30px;
+  }
+  .prod .img {
+    width: 100%;
+  }
+  .prod .detil {
+    width: 100%;
+    margin-top: 15px;
+  }
 }
 /* ////////////////////////////////////////////////////////////////////////////// */
 .foo {
