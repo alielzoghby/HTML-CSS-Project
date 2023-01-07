@@ -172,11 +172,67 @@ body {
 
 /* /////////////////////////////////////////////////////////////////////// */
 .foo {
-  padding: 100px 20px;
+  padding: 50px 20px;
   width: 90%;
   display: flex;
   justify-content: center;
   background-color: black;
   color: #f0e9d2;
   margin: auto;
+}
+
+/* /////////////////////////////////////////////////////////////////////// */
+.content {
+  width: 90%;
+  margin: 30px auto;
+  padding: 15px 60px;
+  display: flex;
+  justify-content: center;
+  background-color: #e6ddc4;
+}
+
+.content form {
+  display: flex;
+  flex-direction: column;
+}
+input,
+button {
+  margin-top: 5px;
+  padding: 5px;
+  background-color: #f0e9d2;
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0.658);
+}
+textarea {
+  width: 600px;
+  resize: none;
+  background-color: #f0e9d2;
+  margin-top: 5px;
+  padding: 10px;
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0.658);
+  height: 200px;
+}
+input:focus,
+textarea:focus {
+  border: 2px solid black;
+}
+.la {
+  margin-top: 20px;
+}
+button {
+  width: 200px;
+  margin: 10px auto;
+  border-radius: 50px;
+  background-color: #678983;
+  color: #181d31;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #181d31;
+  color: #678983;
+  transform: scale(1.05);
+  transition: 0.25s all ease-in-out;
 }

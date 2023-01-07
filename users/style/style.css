@@ -172,11 +172,56 @@ body {
 
 /* /////////////////////////////////////////////////////////////////////// */
 .foo {
-  padding: 100px 20px;
+  padding: 50px 20px;
   width: 90%;
   display: flex;
   justify-content: center;
   background-color: black;
   color: #f0e9d2;
   margin: auto;
+}
+
+/* /////////////////////////////////////////////////////////////////////// */
+
+.content {
+  width: 90%;
+  margin: 30px auto;
+  padding: 45px 60px;
+  display: flex;
+  align-items: center;
+  background-color: #e6ddc4;
+  flex-direction: column;
+}
+
+.content h1 {
+  text-align: center;
+  margin: 15px;
+  font-size: 25px;
+  font-weight: 700;
+}
+table {
+  width: 900px;
+}
+table,
+table tr td,
+table tr th {
+  border-collapse: collapse;
+  padding: 10px;
+}
+table tr th {
+  font-weight: 800;
+}
+table tr td {
+  text-align: center;
+}
+
+tr:nth-child(odd) {
+  background: #fff;
+}
+tr:nth-child(even) {
+  background: #f0e9d2;
+}
+
+th {
+  background-color: #72918b;
 }
