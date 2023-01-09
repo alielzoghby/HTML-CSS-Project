@@ -69,7 +69,7 @@ scroller.addEventListener("click", animatedScrolling);
 const slides = [
   {
     id: 1,
-    image: "/img/1.jpg",
+    image: "img/1.jpg",
     text1: "This is Slide 1",
     text2: "Wahoo",
     buttonText: "Learn More",
@@ -77,7 +77,7 @@ const slides = [
   },
   {
     id: 2,
-    image: "/img/8.jpg",
+    image: "img/8.jpg",
     text1: "This is Slide 2",
     text2: "Wahoo",
     buttonText: "Learn More",
@@ -85,7 +85,7 @@ const slides = [
   },
   {
     id: 3,
-    image: "/img/5.jpg",
+    image: "img/5.jpg",
     text1: "This is Slide 3",
     text2: "Wahoo",
     buttonText: "Learn More",
@@ -93,7 +93,7 @@ const slides = [
   },
   {
     id: 4,
-    image: "/img/2.jpg",
+    image: "img/2.jpg",
     text1: "This is Slide 4",
     text2: "Wahoo",
     buttonText: "Learn More",
