@@ -45,6 +45,12 @@ body {
   background-color: #678983;
   margin-top: 5px;
   border-radius: 6px;
+  position: sticky;
+  top: 5px;
+  z-index: 99999;
+}
+.menu-scroller {
+  background: #6789836c !important;
 }
 .cont {
   display: flex;
@@ -76,7 +82,6 @@ body {
 
 .menu > .nav > ul {
   list-style: none;
-  background-color: #678983;
   border-radius: 6px;
 }
 .menu > .nav > ul > li {
@@ -320,10 +325,15 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(2, 1fr);
   }
+
+  .scroll__top {
+    right: 30px !important;
+  }
   .slider__slide__details {
     top: 150px;
-    padding-left: 31px;
+    padding-left: 75px;
   }
+
   .slider__slide__details h1 {
     font-size: 2rem;
     font-weight: 700;
@@ -336,14 +346,6 @@ body {
   .indicators div {
     width: 10px;
   }
-}
-
-.start {
-  position: absolute !important;
-  top: -5px;
-  left: 0;
-  height: 1200px;
-  border-radius: 0;
 }
 
 /* /////////////////////////////////////////////////////////////////////// */
@@ -543,4 +545,30 @@ main {
   .grid-column > * + * {
     margin-top: 1.5rem;
   }
+}
+/* ///////////////////////////////////////////////////////////////////////////////////// */
+
+.scroll__top {
+  z-index: 10;
+  position: fixed;
+  right: 8px;
+  width: 50px;
+  height: 50px;
+  bottom: 30px;
+  border-radius: 50%;
+  opacity: 0.6;
+  text-align: center;
+  line-height: 50px;
+  transition: opacity 0.3s;
+  box-shadow: 0px 0px 5px 1px;
+  background: #678983;
+}
+
+.scroll__top:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.display__none {
+  display: none;
 }

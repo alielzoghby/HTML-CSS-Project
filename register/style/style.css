@@ -46,6 +46,7 @@ body {
   border-radius: 6px;
 }
 .cont {
+  height: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -120,6 +121,9 @@ body {
   }
 }
 @media only screen and (max-width: 915px) {
+  .cont {
+    height: 8vh;
+  }
   .menu {
     width: 90%;
     display: flex;
@@ -237,7 +241,8 @@ input:not(input[type="radio"]):focus {
   box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
 }
 button {
-  width: 200px;
+  width: 250px;
+  max-width: 80%;
   margin: 20px auto;
   border-radius: 50px;
   background-color: #678983;
@@ -260,6 +265,9 @@ button:hover {
   }
 }
 @media screen and (max-width: 780px) {
+  .content {
+    padding: 15px 20px;
+  }
   .content form {
     width: 100%;
   }

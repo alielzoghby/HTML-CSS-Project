@@ -46,6 +46,7 @@ body {
   border-radius: 6px;
 }
 .cont {
+  height: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -120,6 +121,9 @@ body {
   }
 }
 @media only screen and (max-width: 915px) {
+  .cont {
+    height: 8vh;
+  }
   .menu {
     width: 90%;
     display: flex;
@@ -178,7 +182,9 @@ body {
 
 /* /////////////////////////////////////////////////////////////////////// */
 .foo {
-  padding: 50px 20px;
+  height: 16vh;
+  padding: 0 20px;
+  align-items: center;
   width: 90%;
   display: flex;
   justify-content: center;
@@ -189,6 +195,8 @@ body {
 
 /* /////////////////////////////////////////////////////////////////////// */
 .content {
+  height: 67vh;
+  align-items: center;
   width: 90%;
   margin: 30px auto;
   padding: 15px 60px;
@@ -229,8 +237,9 @@ textarea:focus {
   margin-top: 20px;
 }
 button {
-  min-width: 30%;
-  margin: 10px auto;
+  width: 250px;
+  max-width: 80%;
+  margin: 20px auto;
   border-radius: 50px;
   background-color: #678983;
   color: #181d31;
@@ -246,9 +255,11 @@ button:hover {
 }
 @media screen and (max-width: 920px) {
   .content {
-    width: 100%;
+    padding: 0 20px;
   }
-
+  .foo {
+    height: 19vh;
+  }
   .content form {
     width: 95%;
   }

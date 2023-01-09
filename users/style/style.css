@@ -205,14 +205,20 @@ body {
   font-size: 25px;
   font-weight: 700;
 }
-table {
+
+.table {
   width: 80%;
+  overflow: auto;
+}
+table {
+  width: 100%;
 }
 table,
 table tr td,
 table tr th {
   border-collapse: collapse;
   padding: 10px;
+  white-space: nowrap;
 }
 table tr th {
   font-weight: 800;
@@ -230,4 +236,20 @@ tr:nth-child(even) {
 
 th {
   background-color: #72918b;
+}
+@media screen and (max-width: 847px) {
+  .cont {
+    height: 8vh;
+  }
+  .content {
+    padding: 20px 12px;
+    height: 64vh;
+    justify-content: center;
+  }
+  .table {
+    width: 100%;
+  }
+  .foo {
+    height: 20vh;
+  }
 }
