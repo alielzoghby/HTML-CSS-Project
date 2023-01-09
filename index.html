@@ -5,17 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,600"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
       integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    
     <link rel="stylesheet" href="style/style.css" />
     <title>Home</title>
   </head>
   <body>
-    <div class="menu">
+    <div class="menu menu-bug">
       <div class="cont">
         <div class="logo">
           <a href="index.html"><img src="img/logo.png" alt="logo" /></a>
@@ -54,16 +61,13 @@
         </ul>
       </div>
     </div>
-    <div class="slider-main">
-      <div class="slider">
-        <!--Slides are created in JS -->
-      </div>
-
-      <div class="navigation prev">&#10094;</div>
-      <div class="navigation next">&#10095;</div>
-
-      <div class="indicators"></div>
-    </div>
+<!-- partial:index.partial.html -->
+<div class="cont-s">
+<div class="slider"></div>
+<ul class="nav-s"></div>
+<div data-target='right' class="side-nav side-nav--right"></div>
+<div data-target='left' class="side-nav side-nav--left"></div>
+</div>
     <div class="product-main">
       <h1>Featured product</h1>
       <div class="responsive-container">
@@ -94,7 +98,7 @@
             </a>
             <a class="product" href="pages/prod3.html">
               <div class="product-image">
-                <img src="img/3.webp" />
+                <img src="img/3.jpeg" />
               </div>
               <div class="product-content">
                 <div class="product-info">
@@ -181,6 +185,7 @@
       <i class="fas fa-arrow-up" size="3x"></i>
     </div>
     <div class="foo">FOOTER</div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src="scro.js"></script>
     <!-- <script src="/app.js"></script> -->
   </body>

@@ -23,14 +23,14 @@ bars.addEventListener("click", () => {
   bars.style.display = "none";
   barsActive.style.display = "block";
   nav.style.display = "block";
-  menuScroll.classList.remove("menu-scroller");
+  menuScroll.classList.add("menu-click");
 });
 
 barsActive.addEventListener("click", () => {
   bars.style.display = "block";
   barsActive.style.display = "none";
   nav.style.display = "none";
-  menuScroll.classList.add("menu-scroller");
+  menuScroll.classList.remove("menu-click");
 });
 
 ///////////////////////////////////////////
@@ -54,170 +54,239 @@ window.addEventListener("wheel", function () {
 
 window.addEventListener("scroll", () => {
   if (bars.style.display !== "none") {
-    if (window.scrollY >= 2) {
+    if (window.scrollY > 2) {
       menuScroll.classList.add("menu-scroller");
+      menuScroll.classList.remove("menu-bug");
     } else {
       menuScroll.classList.remove("menu-scroller");
+      menuScroll.classList.add("menu-bug");
     }
   }
 });
 
 scroller.addEventListener("click", animatedScrolling);
 
-//////////////////////////////////slider///////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
-const slides = [
-  {
-    id: 1,
-    image: "img/1.jpg",
-    text1: "This is Slide 1",
-    text2: "Wahoo",
-    buttonText: "Learn More",
-    buttonURL: "#",
-  },
-  {
-    id: 2,
-    image: "img/8.jpg",
-    text1: "This is Slide 2",
-    text2: "Wahoo",
-    buttonText: "Learn More",
-    buttonURL: "#",
-  },
-  {
-    id: 3,
-    image: "img/5.jpg",
-    text1: "This is Slide 3",
-    text2: "Wahoo",
-    buttonText: "Learn More",
-    buttonURL: "#",
-  },
-  {
-    id: 4,
-    image: "img/2.jpg",
-    text1: "This is Slide 4",
-    text2: "Wahoo",
-    buttonText: "Learn More",
-    buttonURL: "#",
-  },
-];
+$(document).ready(function () {
+  const $cont = $(".cont-s");
+  const $slider = $(".slider");
+  const $nav = $(".nav-s");
+  const $bol = $(".nav-slider");
+  const winW = $(window).width();
+  const animSpd = 750; // Change also in CSS
+  const distOfLetGo = winW * 0.2;
+  let curSlide = 1;
+  let animation = false;
+  let autoScrollVar = true;
+  let diff = 0;
 
-const amt = 100 / slides.length;
-const slider = document.querySelector(".slider");
+  // Generating slides
+  let arrCities = ["Amsterdam", "Rome", "New—York", "Singapore", "Prague"]; // Change number of slides in CSS also
+  let numOfCities = arrCities.length;
+  let arrCitiesDivided = [];
 
-let value = 0;
-let indicatorsValue = 0;
-let interval = 8000;
+  arrCities.map((city) => {
+    let length = city.length;
+    let letters = Math.floor(length / 4);
+    let exp = new RegExp(".{1," + letters + "}", "g");
 
-let indicators;
-let start;
-
-loadSlides();
-
-async function loadSlides() {
-  await createSlides();
-  await createIndicators();
-
-  start = setInterval(() => slide("increase"), interval);
-
-  document.querySelectorAll(".navigation").forEach((cur) => {
-    cur.addEventListener("click", () =>
-      cur.classList.contains("next") ? slide("increase") : slide("decrease")
-    );
+    arrCitiesDivided.push(city.match(exp));
   });
 
-  indicators.forEach((cur) =>
-    cur.addEventListener("click", (ev) => clickCheck(ev))
-  );
+  let generateSlide = function (city) {
+    let frag1 = $(document.createDocumentFragment());
+    let frag2 = $(document.createDocumentFragment());
+    const numSlide = arrCities.indexOf(arrCities[city]) + 1;
+    const firstLetter = arrCitiesDivided[city][0].charAt(0);
 
-  const touchSlide = (() => {
-    let start, move, change, sliderWidth;
+    const $slide =
+      $(`<div data-target="${numSlide}" class="slide slide--${numSlide}">
+                              <div class="slide__darkbg slide--${numSlide}__darkbg"></div>
+                              <div class="slide__text-wrapper slide--${numSlide}__text-wrapper"></div>
+                          </div>`);
 
-    slider.addEventListener("touchstart", (e) => {
-      start = e.touches[0].clientX;
-      sliderWidth = slider.clientWidth / indicators.length;
+    const letter = $(`<div class="slide__letter slide--${numSlide}__letter">
+                              ${firstLetter}
+                          </div>`);
+
+    for (let i = 0, length = arrCitiesDivided[city].length; i < length; i++) {
+      const text = $(`<div class="slide__text slide__text--${i + 1}">
+                                  ${arrCitiesDivided[city][i]}
+                              </div>`);
+      frag1.append(text);
+    }
+
+    const navSlide = $(
+      `<div data-target="${numSlide}" class="nav__slide nav__slide--${numSlide}"></div>`
+    );
+    frag2.append(navSlide);
+    $nav.append(frag2);
+
+    $slide
+      .find(`.slide--${numSlide}__text-wrapper`)
+      .append(letter)
+      .append(frag1);
+    $slider.append($slide);
+
+    if (arrCities[city].length <= 4) {
+      $(".slide--" + numSlide)
+        .find(".slide__text")
+        .css("font-size", "12vw");
+    }
+  };
+
+  for (let i = 0, length = numOfCities; i < length; i++) {
+    generateSlide(i);
+  }
+
+  $(".nav__slide--1").addClass("nav-active");
+
+  // Navigation
+  function bullets(dir) {
+    $(".nav__slide--" + curSlide).removeClass("nav-active");
+    $(".nav__slide--" + dir).addClass("nav-active");
+  }
+
+  function timeout() {
+    animation = false;
+  }
+
+  function pagination(direction) {
+    animation = true;
+    diff = 0;
+    $slider.addClass("animation");
+    $slider.css({
+      transform: "translate3d(-" + (curSlide - direction) * 100 + "%, 0, 0)",
     });
 
-    slider.addEventListener("touchmove", (e) => {
-      e.preventDefault();
-      move = e.touches[0].clientX;
-      change = start - move;
+    $slider.find(".slide__darkbg").css({
+      transform: "translate3d(" + (curSlide - direction) * 50 + "%, 0, 0)",
     });
 
-    const mobile = (e) => {
-      change > sliderWidth / 4 ? slide("increase") : null;
-      change * -1 > sliderWidth / 4 ? slide("decrease") : null;
-      [start, move, change, sliderWidth] = [0, 0, 0, 0];
-    };
-    slider.addEventListener("touchend", mobile);
-  })();
-}
+    $slider.find(".slide__letter").css({
+      transform: "translate3d(0, 0, 0)",
+    });
 
-//Create slides from JSON object "slides"
-function createSlides() {
-  for (let i = 0; i < slides.length; i++) {
-    const slide = document.createElement("div");
-    slide.classList.add("slider__slide");
-    slide.innerHTML = `<img src="${slides[i].image}" class="slider__slide__image"><div class="slider__slide__details"><h1>${slides[i].text1}</h1><p>${slides[i].text2}</p><a href="${slides[i].buttonURL}">${slides[i].buttonText}</a></div>`;
-    document.querySelector(".slider").appendChild(slide);
+    $slider.find(".slide__text").css({
+      transform: "translate3d(0, 0, 0)",
+    });
   }
-}
 
-//Create indicators based on the number of slides
-function createIndicators() {
-  for (let i = 0; i < slides.length; i++) {
-    const box = document.createElement("div");
-    box.setAttribute("data-index", i);
-    document.querySelector(".indicators").appendChild(box);
+  function startInterval(n) {
+    start = setInterval(() => {
+      if (curSlide >= numOfCities) {
+        bullets(1);
+        curSlide = 0;
+      }
+
+      pagination(0);
+      setTimeout(timeout, animSpd);
+      bullets(curSlide + 1);
+      curSlide++;
+    }, n);
+    return start;
   }
-  indicators = document.querySelector(".indicators").querySelectorAll("div");
-  indicators[0].classList.add("active");
-  document.querySelector(":root").style.setProperty("--index", slides.length);
-}
+  startin = startInterval(2500);
 
-// function to transform slide
-function move(S, T) {
-  slider.style.transform = `translateX(-${S}%)`;
-  indicators[T].classList.add("active");
-}
+  function navigateRight() {
+    if (curSlide >= numOfCities) {
+      bullets(1);
+      curSlide = 0;
+    }
+    pagination(0);
+    setTimeout(timeout, animSpd);
+    bullets(curSlide + 1);
+    curSlide++;
+    clearInterval(start);
+    startInterval(2500);
+  }
 
-// Check which indicator was clicked
-function clickCheck(e) {
-  clearInterval(start);
-  indicators.forEach((cur) => cur.classList.remove("active"));
-  const check = e.target;
-  check.classList.add("active");
+  function navigateLeft() {
+    if (curSlide <= 1) {
+      bullets(6);
+      curSlide = 6;
+    }
+    pagination(2);
+    setTimeout(timeout, animSpd);
+    bullets(curSlide - 1);
+    curSlide--;
+    clearInterval(start);
+    startInterval(2500);
+  }
 
-  value = check.getAttribute("data-index") * amt;
+  function toDefault() {
+    pagination(1);
+    setTimeout(timeout, animSpd);
+  }
 
-  indicatorsUpdate();
-  move(value, indicatorsValue);
-  start = setInterval(() => slide("increase"), interval);
-}
+  // Events
+  $(document).on("mousedown touchstart", ".slide", function (e) {
+    if (animation) return;
+    let target = +$(this).attr("data-target");
+    let startX = e.pageX || e.originalEvent.touches[0].pageX;
+    $slider.removeClass("animation");
 
-function indicatorsUpdate() {
-  indicatorsValue = value / amt;
-}
+    $(document).on("mousemove touchmove", function (e) {
+      let x = e.pageX || e.originalEvent.touches[0].pageX;
+      diff = startX - x;
+      if ((target === 1 && diff < 0) || (target === numOfCities && diff > 0))
+        return;
 
-function slide(condition) {
-  clearInterval(start);
-  condition === "increase" ? slideIncrease() : slideDecrease();
-  move(value, indicatorsValue);
-  start = setInterval(() => slide("increase"), interval);
-}
+      $slider.css({
+        transform:
+          "translate3d(-" + ((curSlide - 1) * 100 + diff / 30) + "%, 0, 0)",
+      });
 
-function slideIncrease() {
-  indicators.forEach((cur) => cur.classList.remove("active"));
-  value === (document.querySelectorAll(".slider__slide").length - 1) * amt
-    ? (value = 0)
-    : (value += amt);
-  indicatorsUpdate();
-}
+      $slider.find(".slide__darkbg").css({
+        transform:
+          "translate3d(" + ((curSlide - 1) * 50 + diff / 60) + "%, 0, 0)",
+      });
 
-function slideDecrease() {
-  indicators.forEach((cur) => cur.classList.remove("active"));
-  value === 0
-    ? (value = (document.querySelectorAll(".slider__slide").length - 1) * amt)
-    : (value -= amt);
-  indicatorsUpdate();
-}
-/////////////////////////////////////////////////////////////////
+      $slider.find(".slide__letter").css({
+        transform: "translate3d(" + diff / 60 + "vw, 0, 0)",
+      });
+
+      $slider.find(".slide__text").css({
+        transform: "translate3d(" + diff / 15 + "px, 0, 0)",
+      });
+    });
+  });
+
+  $(document).on("mouseup touchend", function (e) {
+    $(document).off("mousemove touchmove");
+
+    if (animation) return;
+
+    if (diff >= distOfLetGo) {
+      navigateRight();
+    } else if (diff <= -distOfLetGo) {
+      navigateLeft();
+    } else {
+      toDefault();
+    }
+  });
+
+  $(document).on("click", ".nav__slide:not(.nav-active)", function () {
+    let target = +$(this).attr("data-target");
+    bullets(target);
+    curSlide = target;
+    pagination(1);
+    clearInterval(start);
+    startInterval(2500);
+  });
+
+  $(document).on("click", ".side-nav", function () {
+    let target = $(this).attr("data-target");
+
+    if (target === "right") navigateRight();
+    if (target === "left") navigateLeft();
+    clearInterval(start);
+    startInterval(2500);
+  });
+
+  $(document).on("keydown", function (e) {
+    if (e.which === 39) navigateRight();
+    if (e.which === 37) navigateLeft();
+  });
+});
