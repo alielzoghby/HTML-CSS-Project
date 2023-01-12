@@ -137,6 +137,9 @@ body {
     align-items: center;
     text-align: center;
   }
+  .menu > .nav > ul > li > a {
+    width: 100%;
+  }
   li:has(> .active) {
     border-bottom: 2px solid black;
   }
@@ -203,6 +206,7 @@ body {
   display: flex;
   justify-content: center;
   background-color: #e6ddc4;
+  position: relative;
 }
 
 .content form {
@@ -217,6 +221,8 @@ button {
   background-color: #f0e9d2;
   outline: none;
   border: 2px solid rgba(0, 0, 0, 0.658);
+  position: relative;
+  z-index: 3;
 }
 textarea {
   width: 100%;
@@ -227,6 +233,8 @@ textarea {
   outline: none;
   border: 2px solid rgba(0, 0, 0, 0.658);
   height: 200px;
+  position: relative;
+  z-index: 3;
 }
 input:focus,
 textarea:focus {
@@ -247,6 +255,14 @@ button {
   cursor: pointer;
 }
 
+.content .img {
+  position: absolute;
+  right: 0;
+  bottom: -114px;
+  z-index: 1;
+  width: 300px;
+}
+
 button:hover {
   background-color: #181d31;
   color: #678983;
@@ -262,5 +278,12 @@ button:hover {
   }
   .content form {
     width: 95%;
+  }
+  .content .img {
+    position: absolute;
+    right: -30px;
+    bottom: -68px;
+    z-index: 1;
+    width: 142px;
   }
 }

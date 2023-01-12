@@ -1,23 +1,10 @@
 const scroller = document.querySelector("#scrollMeUp");
 const menuScroll = document.querySelector(".menu");
+const logo = document.querySelector(".lo");
 let scro;
 let bars = document.querySelector(".fa-bars");
 let barsActive = document.querySelector(".fa-bars-staggered");
 let nav = document.querySelector(".nav");
-
-function disable() {
-  // To get the scroll position of current webpage
-  TopScroll = window.pageYOffset || document.documentElement.scrollTop;
-  (LeftScroll = window.pageXOffset || document.documentElement.scrollLeft),
-    // if scroll happens, set it to the previous value
-    (window.onscroll = function () {
-      window.scrollTo(LeftScroll, TopScroll);
-    });
-}
-
-function enable() {
-  window.onscroll = function () {};
-}
 
 bars.addEventListener("click", () => {
   bars.style.display = "none";
@@ -35,14 +22,6 @@ barsActive.addEventListener("click", () => {
 
 ///////////////////////////////////////////
 
-const animatedScrolling = () => {
-  const c = window.scrollY;
-  if (c > 0) {
-    scro = window.requestAnimationFrame(animatedScrolling);
-    window.scrollTo(0, c - c / 12);
-  }
-};
-
 window.addEventListener("wheel", function () {
   window.cancelAnimationFrame(scro);
   if (window.scrollY > 200) {
@@ -57,14 +36,30 @@ window.addEventListener("scroll", () => {
     if (window.scrollY > 2) {
       menuScroll.classList.add("menu-scroller");
       menuScroll.classList.remove("menu-bug");
+      logo.src = "img/logo.png";
     } else {
       menuScroll.classList.remove("menu-scroller");
       menuScroll.classList.add("menu-bug");
+      logo.src = "img/logo2.png";
     }
   }
 });
 
-scroller.addEventListener("click", animatedScrolling);
+scroller.addEventListener(
+  "click",
+  (animatedScrolling = () => {
+    const c = window.scrollY;
+    if (c > 0) {
+      scro = window.requestAnimationFrame(animatedScrolling);
+      window.scrollTo(0, c - c / 12);
+    }
+    if (window.scrollY > 200) {
+      scroller.classList.remove("display__none");
+    } else {
+      scroller.classList.add("display__none");
+    }
+  })
+);
 
 ///////////////////////////////////////////////////////////////////////////////
 

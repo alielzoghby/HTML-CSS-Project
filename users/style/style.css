@@ -133,6 +133,9 @@ body {
     align-items: center;
     text-align: center;
   }
+  .menu > .nav > ul > li > a {
+    width: 100%;
+  }
   li:has(> .active) {
     border-bottom: 2px solid black;
   }

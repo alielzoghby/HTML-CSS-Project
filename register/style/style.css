@@ -137,6 +137,9 @@ body {
     align-items: center;
     text-align: center;
   }
+  .menu > .nav > ul > li > a {
+    width: 100%;
+  }
 
   .menu > .nav > ul > li:hover,
   .menu > .nav > ul > li:hover i,
